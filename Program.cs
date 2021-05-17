@@ -23,11 +23,11 @@ namespace ValidarData17_05_2021
         public void PegarDataProximaDaRealidade(out int ano, out int mes, out int dia)
         {
             Console.WriteLine("Informe o Ano");
-             ano = Convert.ToInt32(Console.ReadLine());
+            ano = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Informe o Mês");
-             mes = Convert.ToInt32(Console.ReadLine());
+            mes = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Informe o Dia");
-             dia = Convert.ToInt32(Console.ReadLine());
+            dia = Convert.ToInt32(Console.ReadLine());
 
             ValidarData(ano, mes, dia);
         }
@@ -78,22 +78,22 @@ namespace ValidarData17_05_2021
             }
             else if (mes == 2)
             {
-                float aux = ano % 4;
+                bool auxbol = false;
+                if (ano % 4 == 0 || ano % 400 == 0 || ano % 100 == 0)
+                    auxbol = true;
 
-                if (aux == 0)
+                if (auxbol)
                 {
                     if (dia > 29)
                     {
                         throw new FormatException("Dia não pode ter mais que 29 dias no mês e ano selecionado");
-
                     }
                 }
-                if (aux != 0)
+                if (!auxbol)
                 {
                     if (dia > 28)
                     {
                         throw new FormatException("Dia não pode ter mais que 28 dias no mês e ano selecionado");
-
                     }
                 }
             }
@@ -115,19 +115,19 @@ namespace ValidarData17_05_2021
             try
             {
                 // criando e pegando os dados da Data
-                 data.PegarDataProximaDaRealidade(out ano,out mes,out dia);
+                data.PegarDataProximaDaRealidade(out ano, out mes, out dia);
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\nData Valida!");
 
                 //mostrando a data Valida
-                data.MostrarData(ano,dia,mes);
+                data.MostrarData(ano, dia, mes);
             }
             catch (FormatException ex)
             {
                 //mostrando o Erro
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\n"+ex.Message);
+                Console.WriteLine("\n" + ex.Message);
             }
             finally
             {
