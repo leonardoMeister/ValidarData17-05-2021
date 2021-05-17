@@ -20,30 +20,28 @@ namespace ValidarData17_05_2021
         /// Erro possivel FormatException
         /// </summary>
         /// <returns>Retorna um DateTime</returns>
-        public DateTime PegarDataProximaDaRealidade()
+        public void PegarDataProximaDaRealidade(out int ano, out int mes, out int dia)
         {
             Console.WriteLine("Informe o Ano");
-            int ano = Convert.ToInt32(Console.ReadLine());
+             ano = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Informe o Mês");
-            int mes = Convert.ToInt32(Console.ReadLine());
+             mes = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Informe o Dia");
-            int dia = Convert.ToInt32(Console.ReadLine());
+             dia = Convert.ToInt32(Console.ReadLine());
 
             ValidarData(ano, mes, dia);
-
-            return new DateTime(ano, mes, dia);
         }
 
         /// <summary>
         /// Este Método Imprime na tela uma Data,
         /// </summary>
         /// <param name="data">Data para imprimir</param>
-        public void MostrarData(DateTime data)
+        public void MostrarData(int ano, int dia, int mes)
         {
             Console.WriteLine("Mostrando Data:");
-            Console.WriteLine("Ano: " + data.Year);
-            Console.WriteLine("Mês: " + data.Month);
-            Console.WriteLine("Dia: " + data.Day);
+            Console.WriteLine("Ano: " + ano);
+            Console.WriteLine("Mês: " + mes);
+            Console.WriteLine("Dia: " + dia);
         }
         private static void ValidarData(int ano, int mes, int dia)
         {
@@ -112,16 +110,18 @@ namespace ValidarData17_05_2021
             //Minha Classe para manipular datas
             PegarData data = new PegarData();
 
+            int dia, mes, ano;
             //tratamento de exception para FormatException
             try
             {
                 // criando e pegando os dados da Data
-                DateTime DataQualquer = data.PegarDataProximaDaRealidade();
+                 data.PegarDataProximaDaRealidade(out ano,out mes,out dia);
 
-                Console.WriteLine("Data Valida!");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nData Valida!");
 
                 //mostrando a data Valida
-                data.MostrarData(DataQualquer);
+                data.MostrarData(ano,dia,mes);
             }
             catch (FormatException ex)
             {
